@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
 //manin e a função incial que recebe o myApp( que é o  o app inteiro)
 void main() {
   runApp(const MyApp());
 }
 
-//criando um widtge custumizado que recebe todos os outros 
+//criando um widtge custumizado que recebe todos os outros
 //no caso ira receber os paginas( as paginas tvbbm são widthe )
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -14,8 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   //build e metodo que já existe na classe StatelessWidget
   Widget build(BuildContext context) {
-    return   MaterialApp(
-      home:   HomePage(),
+    return MaterialApp(
+      home: HomePage(),
+
     );
   }
 }
@@ -28,62 +29,61 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   int count = 0;
+  int count = 0;
 
   void decrement() {
     setState(() {
-       count--;
+      count--;
     });
-   
+
     print('decrement $count');
   }
 
   void increment() {
     setState(() {
-       count++;
+      count++;
     });
-   
+
     print('increment $count');
- 
+  }
+
+  void leftPeople() {
+    setState(() {
+      count = count - count;
+      print('$count');
+    });
   }
 
   bool get isEmpty => count == 0;
   bool get isFull => count == 20;
- 
 
   @override
-  Widget build(BuildContext context) {
-    print('bukd');
+  Widget build(BuildContext context) {    
     return Scaffold(
       backgroundColor: Colors.red,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/blur-office.jpg'),
-            fit: BoxFit.cover
-          ),
+              image: AssetImage('assets/images/blur-office.jpg'),
+              fit: BoxFit.cover),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-           
           children: [
             Text(
-              isFull ?  'Lotado' : 'Pode entrar',
+              isFull ? 'Lotado' : 'Pode entrar',
               style: TextStyle(
                 fontSize: 30,
-                color: isFull ? Colors.red: Colors.pink,
+                color: isFull ? Colors.red : Colors.pink,
                 fontWeight: FontWeight.w900,
               ),
             ),
             Padding(
-              
               padding: EdgeInsets.all(60),
-          
-              child:   Text( 
-                  '$count',
+              child: Text('$count',
                   style: TextStyle(
                       fontSize: 100,
-                      color:isFull ? Colors.red: Colors.black ,
+                      color: isFull ? Colors.red : Colors.black,
                       fontWeight: FontWeight.bold)),
             ),
             Row(
@@ -92,7 +92,9 @@ class _HomePageState extends State<HomePage> {
                 TextButton(
                   style: TextButton.styleFrom(
                       fixedSize: Size(100, 100),
-                      backgroundColor: isEmpty ? Colors.white.withOpacity(0.2):  Colors.white,
+                      backgroundColor: isEmpty
+                          ? Colors.white.withOpacity(0.2)
+                          : Colors.white,
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24))),
@@ -107,9 +109,10 @@ class _HomePageState extends State<HomePage> {
                   width: 32,
                 ),
                 TextButton(
-                  onPressed: isFull ? null :  increment,
+                  onPressed: isFull ? null : increment,
                   style: TextButton.styleFrom(
-                       backgroundColor:isFull ? Colors.transparent :  Colors.white,
+                      backgroundColor:
+                          isFull ? Colors.transparent : Colors.white,
                       fixedSize: Size(100, 100),
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(
@@ -120,13 +123,29 @@ class _HomePageState extends State<HomePage> {
                   ),
                 )
               ],
-            )
+            ),
+                Padding(
+                padding: EdgeInsets.all(60),
+            child: Row( 
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [ 
+                TextButton(
+                  onPressed: leftPeople,
+                  style: TextButton.styleFrom( 
+                    backgroundColor: Colors.yellow,
+                    side: BorderSide( width: 40, color: Colors.white, style:  BorderStyle.solid)
+                  ),
+                  child: Text('Pedir para $count  sair', style: TextStyle(color: Colors.black, fontSize: 16, ),),
+                ) 
+              ],
+            ) 
+                )
           ],
         ),
+        
       ),
     );
   }
 }
-  
+
 //criando a pagina Home
- 
